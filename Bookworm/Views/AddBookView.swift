@@ -24,16 +24,11 @@ struct AddBookView: View {
             Form {
                 Section {
                     TextField("Name of book", text: $title)
-                    TextField("Author's name", text: $author)
-                    RatingView(rating: $rating)
+                    TextField("Author's name", text: $author)              
                 }
                 Section {
                     TextEditor(text: $review)
-                    Picker("Rating", selection: $rating) {
-                        ForEach(0..<6) {
-                            Text(String($0))
-                        }
-                    }
+                    RatingView(rating: $rating)
                 } header: {
                     Text("Write a review")
                 }
@@ -46,6 +41,7 @@ struct AddBookView: View {
                         newBook.rating = Int16(rating)
                         newBook.genre = genre
                         newBook.review = review
+                        newBook.date = Date.now
 
                         try? moc.save() // TODO: Should there be more safeties in place here? Check UP
                         dismiss()

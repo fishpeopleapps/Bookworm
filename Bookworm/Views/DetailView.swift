@@ -30,6 +30,9 @@ struct DetailView: View {
             Text(book.author ?? "Unknown Author")
                 .font(.title)
                 .foregroundColor(.secondary)
+            if let date = book.date {
+                Text(date.formatted(date: .abbreviated, time: .omitted))
+            }
 
             Text(book.review ?? "No review")
                 .padding()
